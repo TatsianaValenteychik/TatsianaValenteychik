@@ -3,7 +3,6 @@ Tatsiana Valenteychik
 Системы контроля версии Git.Flask.
 Разработка API на Flask.
 
- быстрее достигнута!
 1. Необходимо разработать REST API, предоставляющее возможность ведения блога.
 2. API должен иметь минимум 3 сущности:
 a.	Пользователь
@@ -20,6 +19,20 @@ a.	помимо кода, должна быть краткая инструкц�
 b.	в инструкции необходимо указать примеры тела запросов, HTTP метод и соответствующие URL для осуществления операций
 
 Решение.
+
+Проект попускается через https://web.postman.com.
+Используется URL: 
+localhost:5000/post
+localhost:5000/post/reaction
+localhost:5000/post/post_id
+localhost:5000/post/post_id/reactions
+
+Данные для тестирования.
+{"body": "Hello World", "author": "@aqaguy"}
+{"body": "Hello", "author": "@aqaguy"}
+{"body": "Sun", "author": "@aqaguy"}
+{"body": "Sun, Sun", "author": "@aqaguy"} - добавление и удаление поста.
+ 
 Инструкция:
 1. Создали папку Rest_API_home, в ней создали файлы наших сущностей:
   -Пользователи (user.py)
@@ -150,63 +163,5 @@ def delete_post(post_id):
 if __name__ == '__main__':
     app.run(debug=True)
 
-    2. Через https://web.postman.co проверили работу нашего кода.
+    3. Через https://web.postman.com проверили работу нашего кода.
 
-localhost:5000/post
-localhost:5000/post/reaction
-
-4. Тело письма использовали 
-{"body": "Hello World", "author": "@aqaguy"}
-{"body": "Hello", "author": "@aqaguy"}
-{"body": "Sun", "author": "@aqaguy"}
-
---Создание поста
-Пример ответа по телу {"body": "Sun", "author": "@aqaguy"}
-  "post_id": "cef1c00c-33a0-4ecd-a42f-e66b83dda97b",
-    "status": "success"
-
-    по post_id cef1c00c-33a0-4ecd-a42f-e66b83dda97b добавили реакию на пост
-Тело
-    {
-    "post_id": "cef1c00c-33a0-4ecd-a42f-e66b83dda97b",
-    "user_id": "user123",
-    "reaction_type": "like"
-}
-
-ответ
-{
-    "reaction_id": "f46e1ecd-ce0e-40fd-a37f-42dec2f38b31",
-    "status": "success"
-}
-
---Просмотр реккции по post_id cef1c00c-33a0-4ecd-a42f-e66b83dda97b
-{
-    "reactions": [
-        {
-            "reaction_id": "f46e1ecd-ce0e-40fd-a37f-42dec2f38b31",
-            "reaction_type": "like",
-            "user_id": "user123"
-        }
-    ]
-}
-
---Изменили пост по post_id cef1c00c-33a0-4ecd-a42f-e66b83dda97b
- с {"body": "Sun", "author": "@aqaguy"} на {"body": "Sun, Sun", "author": "@aqaguy"}
-
- Ответ 
- {
-    "message": "Post updated successfully"
-}
-
---Удалили пост по post_id d1b7e1f5-0566-4a77-91b3-18cd5131bfe3
- {
-            "author": "@aqaguy",
-            "body": "Hello World",
-            "post_id": "d1b7e1f5-0566-4a77-91b3-18cd5131bfe3"
-        }
-Ответ 
-{
-    "message": "Post deleted successfully"
-}     
-
-5. Сделали архив и закинули в репозиторий
